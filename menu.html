@@ -1,0 +1,525 @@
+<!doctype html>
+<html
+  lang="es"
+  x-data="{
+    activeCategory: 'bebidas',
+    cart: [],
+    addToCart(item) {
+        this.cart.push(item);
+    },
+    removeFromCart(index) {
+        this.cart.splice(index, 1);
+    },
+    get cartTotal() {
+        return this.cart.reduce((total, item) => total + item.price, 0);
+    },
+    menuItems: {
+        bebidas: [
+            { id: 1, name: 'Café Espresso', price: 25, description: 'Café negro intenso con crema dorada', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' },
+            { id: 2, name: 'Capuccino', price: 35, description: 'Espresso con leche vaporizada y espuma', image: 'https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' },
+            { id: 3, name: 'Té Verde', price: 20, description: 'Infusión de hojas de té verde orgánico', image: 'https://images.unsplash.com/photo-1559177697-9b4c0b5e6997?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' },
+            { id: 4, name: 'Chocolate Caliente', price: 30, description: 'Chocolate artesanal con leche entera', image: 'https://images.unsplash.com/photo-1511381939415-e44015466834?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' }
+        ],
+        desayunos: [
+            { id: 5, name: 'Avocado Toast', price: 65, description: 'Pan integral con aguacate, huevo y especias', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' },
+            { id: 6, name: 'Hotcakes', price: 55, description: 'Tres hotcakes con miel y frutas de temporada', image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' },
+            { id: 7, name: 'Omelette', price: 60, description: 'Omelette con champiñones, espinaca y queso', image: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' }
+        ],
+        postres: [
+            { id: 8, name: 'Cheesecake', price: 45, description: 'Tarta de queso con coulis de frutos rojos', image: 'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' },
+            { id: 9, name: 'Brownie', price: 40, description: 'Brownie de chocolate con nueces y helado', image: 'https://images.unsplash.com/photo-1564355808539-22fda35bed7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' }
+        ],
+        especiales: [
+            { id: 10, name: 'Waffle Belga', price: 75, description: 'Waffle crujiente con helado de vainilla y chocolate', featured: true, image: 'https://images.unsplash.com/photo-1558589606-6f619329d5e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' },
+            { id: 11, name: 'Brunch Completo', price: 120, description: 'Huevos, pan tostado, aguacate, frutas y café', featured: true, image: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80' }
+        ]
+    }
+}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menú Digital | Cafetería Moderna</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      .hero-bg {
+        background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+          radial-gradient(
+            circle at 30% 30%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 70% 70%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 20%
+          );
+        animation: rotate 15s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .menu-item {
+        transition: all 0.3s ease;
+        transform-style: preserve-3d;
+      }
+
+      .menu-item:hover {
+        transform: translateY(-5px) rotateX(5deg);
+        box-shadow: 0 10px 25px rgba(110, 72, 170, 0.2);
+      }
+
+      .category-btn {
+        transition: all 0.3s ease;
+      }
+
+      .category-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.6s forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+
+      .cart-item {
+        transition: all 0.3s ease;
+      }
+
+      .cart-item:hover {
+        background-color: rgba(249, 250, 251, 0.8);
+      }
+
+      .image-hover {
+        transition: transform 0.5s ease;
+      }
+
+      .image-hover:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="hero-bg text-white py-12 px-4 text-center">
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <h1
+          class="text-3xl md:text-4xl font-bold mb-2 animate__animated animate__fadeInDown"
+        >
+          Cafetería Moderna
+        </h1>
+        <p
+          class="text-lg opacity-90 animate__animated animate__fadeIn animate__delay-1s"
+        >
+          Disfruta de nuestra selección gourmet
+        </p>
+      </div>
+    </header>
+
+    <!-- Categories Navigation -->
+    <nav class="sticky top-0 bg-white shadow-sm z-10">
+      <div class="max-w-4xl mx-auto px-4 overflow-x-auto">
+        <div class="flex space-x-2 py-3">
+          <button
+            @click="activeCategory = 'bebidas'"
+            :class="activeCategory === 'bebidas' ? 'bg-purple-600 text-white shadow-md' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
+            class="category-btn px-5 py-2 rounded-full font-medium transition-all"
+          >
+            <i class="fas fa-coffee mr-2"></i>Bebidas
+          </button>
+          <button
+            @click="activeCategory = 'desayunos'"
+            :class="activeCategory === 'desayunos' ? 'bg-purple-600 text-white shadow-md' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
+            class="category-btn px-5 py-2 rounded-full font-medium transition-all"
+          >
+            <i class="fas fa-egg mr-2"></i>Desayunos
+          </button>
+          <button
+            @click="activeCategory = 'postres'"
+            :class="activeCategory === 'postres' ? 'bg-purple-600 text-white shadow-md' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
+            class="category-btn px-5 py-2 rounded-full font-medium transition-all"
+          >
+            <i class="fas fa-ice-cream mr-2"></i>Postres
+          </button>
+          <button
+            @click="activeCategory = 'especiales'"
+            :class="activeCategory === 'especiales' ? 'bg-purple-600 text-white shadow-md' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
+            class="category-btn px-5 py-2 rounded-full font-medium transition-all"
+          >
+            <i class="fas fa-star mr-2"></i>Especiales
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row px-4 py-8 gap-8">
+      <!-- Menu Content -->
+      <main class="md:w-2/3">
+        <!-- Bebidas Section -->
+        <div x-show="activeCategory === 'bebidas'" x-transition class="fade-in">
+          <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">
+            Bebidas
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <template x-for="item in menuItems.bebidas" :key="item.id">
+              <div
+                class="menu-item bg-white rounded-xl shadow-md overflow-hidden"
+              >
+                <div class="relative group">
+                  <img
+                    :src="item.image"
+                    :alt="item.name"
+                    class="w-full h-48 object-cover image-hover"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+                  ></div>
+                </div>
+                <div class="p-5">
+                  <div class="flex justify-between items-start mb-2">
+                    <h3
+                      class="text-xl font-bold text-gray-800"
+                      x-text="item.name"
+                    ></h3>
+                    <span
+                      class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-full"
+                    >
+                      <span x-text="'$' + item.price"></span>
+                    </span>
+                  </div>
+                  <p class="text-gray-600 mb-4" x-text="item.description"></p>
+                  <button
+                    @click="addToCart(item)"
+                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  >
+                    <i class="fas fa-plus mr-2"></i> Agregar
+                  </button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Desayunos Section -->
+        <div
+          x-show="activeCategory === 'desayunos'"
+          x-transition
+          class="fade-in"
+        >
+          <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">
+            Desayunos
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <template x-for="item in menuItems.desayunos" :key="item.id">
+              <div
+                class="menu-item bg-white rounded-xl shadow-md overflow-hidden"
+              >
+                <div class="relative group">
+                  <img
+                    :src="item.image"
+                    :alt="item.name"
+                    class="w-full h-48 object-cover image-hover"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+                  ></div>
+                </div>
+                <div class="p-5">
+                  <div class="flex justify-between items-start mb-2">
+                    <h3
+                      class="text-xl font-bold text-gray-800"
+                      x-text="item.name"
+                    ></h3>
+                    <span
+                      class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-full"
+                    >
+                      <span x-text="'$' + item.price"></span>
+                    </span>
+                  </div>
+                  <p class="text-gray-600 mb-4" x-text="item.description"></p>
+                  <button
+                    @click="addToCart(item)"
+                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  >
+                    <i class="fas fa-plus mr-2"></i> Agregar
+                  </button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Postres Section -->
+        <div x-show="activeCategory === 'postres'" x-transition class="fade-in">
+          <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">
+            Postres
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <template x-for="item in menuItems.postres" :key="item.id">
+              <div
+                class="menu-item bg-white rounded-xl shadow-md overflow-hidden"
+              >
+                <div class="relative group">
+                  <img
+                    :src="item.image"
+                    :alt="item.name"
+                    class="w-full h-48 object-cover image-hover"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+                  ></div>
+                </div>
+                <div class="p-5">
+                  <div class="flex justify-between items-start mb-2">
+                    <h3
+                      class="text-xl font-bold text-gray-800"
+                      x-text="item.name"
+                    ></h3>
+                    <span
+                      class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-full"
+                    >
+                      <span x-text="'$' + item.price"></span>
+                    </span>
+                  </div>
+                  <p class="text-gray-600 mb-4" x-text="item.description"></p>
+                  <button
+                    @click="addToCart(item)"
+                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  >
+                    <i class="fas fa-plus mr-2"></i> Agregar
+                  </button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Especiales Section -->
+        <div
+          x-show="activeCategory === 'especiales'"
+          x-transition
+          class="fade-in"
+        >
+          <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">
+            Especiales del Chef
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <template x-for="item in menuItems.especiales" :key="item.id">
+              <div
+                class="menu-item bg-white rounded-xl shadow-md overflow-hidden"
+              >
+                <div class="relative group">
+                  <img
+                    :src="item.image"
+                    :alt="item.name"
+                    class="w-full h-48 object-cover image-hover"
+                  />
+                  <template x-if="item.featured">
+                    <span
+                      class="absolute top-3 right-3 bg-yellow-400 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full animate-pulse"
+                    >
+                      Recomendado
+                    </span>
+                  </template>
+                  <div
+                    class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+                  ></div>
+                </div>
+                <div class="p-5">
+                  <div class="flex justify-between items-start mb-2">
+                    <h3
+                      class="text-xl font-bold text-gray-800"
+                      x-text="item.name"
+                    ></h3>
+                    <span
+                      class="bg-purple-100 text-purple-800 font-bold px-3 py-1 rounded-full"
+                    >
+                      <span x-text="'$' + item.price"></span>
+                    </span>
+                  </div>
+                  <p class="text-gray-600 mb-4" x-text="item.description"></p>
+                  <button
+                    @click="addToCart(item)"
+                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  >
+                    <i class="fas fa-plus mr-2"></i> Agregar
+                  </button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </main>
+
+      <!-- Shopping Cart Sidebar -->
+      <aside class="md:w-1/3">
+        <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+            <i class="fas fa-shopping-cart mr-2 text-purple-600"></i>
+            Tu Pedido
+          </h2>
+
+          <template x-if="cart.length === 0">
+            <div class="text-center py-8">
+              <i class="fas fa-shopping-basket text-4xl text-gray-300 mb-3"></i>
+              <p class="text-gray-500">Tu carrito está vacío</p>
+            </div>
+          </template>
+
+          <div x-show="cart.length > 0">
+            <div class="space-y-3 mb-4 max-h-96 overflow-y-auto">
+              <template x-for="(item, index) in cart" :key="index">
+                <div
+                  class="cart-item flex justify-between items-center p-3 border-b border-gray-100"
+                >
+                  <div class="flex items-center">
+                    <img
+                      :src="item.image"
+                      class="w-12 h-12 object-cover rounded-lg mr-3"
+                      :alt="item.name"
+                    />
+                    <div>
+                      <h3
+                        class="font-medium text-gray-800"
+                        x-text="item.name"
+                      ></h3>
+                      <span
+                        class="text-sm text-gray-600"
+                        x-text="'$' + item.price"
+                      ></span>
+                    </div>
+                  </div>
+                  <button
+                    @click="removeFromCart(index)"
+                    class="text-red-500 hover:text-red-700"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </template>
+            </div>
+
+            <div class="border-t border-gray-200 pt-4">
+              <div class="flex justify-between mb-4">
+                <span class="font-bold text-gray-800">Total:</span>
+                <span
+                  class="font-bold text-purple-600"
+                  x-text="'$' + cartTotal"
+                ></span>
+              </div>
+
+              <button
+                class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg font-bold transition-colors"
+              >
+                <i class="fas fa-check-circle mr-2"></i> Confirmar Pedido
+              </button>
+
+              <button
+                @click="cart = []"
+                class="w-full mt-2 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-lg font-medium transition-colors"
+              >
+                <i class="fas fa-trash-alt mr-2"></i> Vaciar Carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <div class="flex justify-center space-x-6 mb-4">
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+        <p class="text-sm">
+          © 2024 Cafetería Moderna. Todos los derechos reservados.
+        </p>
+        <p class="text-xs text-gray-400 mt-2">
+          Menú digital diseñado por
+          <a href="#" class="underline hover:text-white">Crick Marketing</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Scroll animations
+      document.addEventListener("DOMContentLoaded", function () {
+        const fadeElements = document.querySelectorAll(".fade-in");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = "running";
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        fadeElements.forEach((el) => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>

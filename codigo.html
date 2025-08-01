@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Códigos QR Creativos | TuMarca</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Fondos CSS personalizados */
+      .hero-bg {
+        background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+          radial-gradient(
+            circle at 30% 30%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 70% 70%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 20%
+          );
+        animation: rotate 20s linear infinite;
+      }
+
+      .qr-pattern {
+        background-color: #f5f3ff;
+        background-image:
+          linear-gradient(#e9d5ff 1px, transparent 1px),
+          linear-gradient(90deg, #e9d5ff 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      .feature-bg {
+        background:
+          linear-gradient(135deg, #faf5ff 0%, #ffffff 100%),
+          repeating-linear-gradient(
+            45deg,
+            #e9d5ff 0px,
+            #e9d5ff 10px,
+            transparent 10px,
+            transparent 20px
+          );
+      }
+
+      /* Animaciones */
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.9;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Componentes */
+      .qr-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(110, 72, 170, 0.2);
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .qr-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(110, 72, 170, 0.3);
+      }
+
+      .qr-demo {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        background:
+          linear-gradient(45deg, #6e48aa 25%, transparent 25%) -50px 0,
+          linear-gradient(-45deg, #6e48aa 25%, transparent 25%) -50px 0,
+          linear-gradient(45deg, transparent 75%, #6e48aa 75%),
+          linear-gradient(-45deg, transparent 75%, #6e48aa 75%);
+        background-size: 100px 100px;
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      .qr-demo::before {
+        content: "";
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
+        background: white;
+      }
+
+      .color-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .color-option:hover {
+        transform: scale(1.2);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(110, 72, 170, 0.4);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 20px rgba(110, 72, 170, 0.5);
+      }
+
+      /* Efectos de aparición */
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .delay-1 {
+        animation-delay: 0.3s;
+      }
+      .delay-2 {
+        animation-delay: 0.6s;
+      }
+      .delay-3 {
+        animation-delay: 0.9s;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <!-- Hero Section con fondo animado -->
+    <header
+      class="hero-bg text-white py-20 px-4 text-center relative overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-black opacity-10"></div>
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">
+          Códigos QR Creativos
+        </h1>
+        <p class="text-xl md:text-2xl opacity-90 mb-8 fade-in delay-1">
+          Diseños únicos que reflejan tu marca
+        </p>
+        <div class="fade-in delay-2">
+          <button
+            class="btn-primary px-8 py-3 rounded-full font-bold inline-block"
+          >
+            <i class="fas fa-qrcode mr-2"></i> Ver Ejemplos
+          </button>
+        </div>
+      </div>
+
+      <!-- Elementos decorativos CSS -->
+      <div
+        class="absolute top-20 left-10 w-10 h-10 rounded-full bg-white opacity-10 animate-float"
+        style="animation-delay: 0.5s"
+      ></div>
+      <div
+        class="absolute top-1/4 right-1/4 w-6 h-6 rounded-full bg-white opacity-10 animate-float"
+        style="animation-delay: 1s"
+      ></div>
+      <div
+        class="absolute bottom-20 right-20 w-8 h-8 rounded-full bg-white opacity-10 animate-float"
+        style="animation-delay: 1.5s"
+      ></div>
+    </header>
+
+    <!-- QR Generator Demo -->
+    <section class="py-16 px-4 qr-pattern">
+      <div class="max-w-6xl mx-auto">
+        <div class="qr-card max-w-3xl mx-auto p-8 md:p-10">
+          <h2
+            class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 fade-in"
+          >
+            Personaliza tu QR
+          </h2>
+
+          <div class="md:flex gap-8">
+            <div class="md:w-1/2 mb-8 md:mb-0 fade-in">
+              <div class="qr-demo mb-6"></div>
+              <p class="text-center text-gray-600">Vista previa interactiva</p>
+            </div>
+
+            <div class="md:w-1/2 fade-in delay-1">
+              <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >Enlace o texto</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    placeholder="https://tumarca.com"
+                    class="w-full pl-4 pr-10 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  />
+                  <i
+                    class="fas fa-link absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >Color del QR</label
+                >
+                <div class="flex gap-3">
+                  <div class="color-option bg-purple-600"></div>
+                  <div class="color-option bg-blue-600"></div>
+                  <div class="color-option bg-green-600"></div>
+                  <div class="color-option bg-red-600"></div>
+                  <div class="color-option bg-black"></div>
+                </div>
+              </div>
+
+              <button class="btn-primary w-full py-3 rounded-lg font-bold mt-4">
+                <i class="fas fa-download mr-2"></i> Descargar QR
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usos comunes -->
+    <section class="py-16 px-4 feature-bg">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12 fade-in"
+        >
+          Usos Creativos para tus QR
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Uso 1 -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 fade-in delay-1"
+          >
+            <div
+              class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 mb-4"
+            >
+              <i class="fas fa-store text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Menús Digitales
+            </h3>
+            <p class="text-gray-600">
+              Para restaurantes y cafeterías con estilo único.
+            </p>
+          </div>
+
+          <!-- Uso 2 -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 fade-in delay-2"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mb-4"
+            >
+              <i class="fas fa-wifi text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Acceso WiFi</h3>
+            <p class="text-gray-600">Conexión automática para tus clientes.</p>
+          </div>
+
+          <!-- Uso 3 -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 fade-in delay-3"
+          >
+            <div
+              class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center text-green-600 mb-4"
+            >
+              <i class="fas fa-id-card text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Contacto Rápido
+            </h3>
+            <p class="text-gray-600">Agrega tus datos directo a la agenda.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section
+      class="py-20 px-4 bg-gradient-to-r from-purple-700 to-purple-900 text-white text-center"
+    >
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 fade-in">
+          ¿Listo para destacar con QR únicos?
+        </h2>
+        <p class="text-xl mb-8 opacity-90 fade-in delay-1">
+          Diseñamos códigos QR que tus clientes recordarán
+        </p>
+        <a
+          href="#"
+          class="btn-primary px-8 py-3 rounded-full font-bold inline-block fade-in delay-2"
+        >
+          <i class="fas fa-palette mr-2"></i> Personalizar Ahora
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 bg-gray-900 text-white">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="text-sm">
+          © 2024 TuMarca. Diseño de códigos QR profesionales.
+        </p>
+        <p class="text-xs text-gray-400 mt-2">
+          Todos los elementos visuales creados con CSS puro
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Animaciones al hacer scroll
+      document.addEventListener("DOMContentLoaded", function () {
+        const fadeElements = document.querySelectorAll(".fade-in");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = "running";
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        fadeElements.forEach((el) => observer.observe(el));
+
+        // Efecto hover para los colores
+        const colorOptions = document.querySelectorAll(".color-option");
+        const qrDemo = document.querySelector(".qr-demo");
+
+        colorOptions.forEach((option) => {
+          option.addEventListener("click", function () {
+            const color = window.getComputedStyle(this).backgroundColor;
+            const rgb = color.match(/\d+/g);
+            const hex = rgb
+              ? `#${((1 << 24) + (parseInt(rgb[0]) << 16) + (parseInt(rgb[1]) << 8) + parseInt(rgb[2])).toString(16).slice(1)}`
+              : "#6e48aa";
+
+            // Cambiar color del QR (simulado)
+            qrDemo.style.backgroundImage = `
+                        linear-gradient(45deg, ${hex} 25%, transparent 25%) -50px 0,
+                        linear-gradient(-45deg, ${hex} 25%, transparent 25%) -50px 0,
+                        linear-gradient(45deg, transparent 75%, ${hex} 75%),
+                        linear-gradient(-45deg, transparent 75%, ${hex} 75%)
+                    `;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

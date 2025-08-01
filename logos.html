@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diseño de Logos Profesionales | TuMarca</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .logo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+      .watermark {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="%23e5e7eb" stroke-width="2"><rect x="10" y="10" width="80" height="80" rx="15"/></svg>');
+        background-repeat: repeat;
+        background-size: 100px 100px;
+      }
+      #logo3d-container {
+        width: 100%;
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+      }
+      .fade-in {
+        animation: fadeIn 1s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .float-anim {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Header with 3D Logo -->
+    <header
+      class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-16 px-4 text-center relative overflow-hidden"
+    >
+      <div id="logo3d-container"></div>
+      <div class="relative z-10">
+        <h1
+          class="text-3xl md:text-4xl font-bold mb-4 fade-in"
+          style="animation-delay: 0.3s"
+        >
+          Diseño de Identidad Visual
+        </h1>
+        <p class="text-xl opacity-90 fade-in" style="animation-delay: 0.6s">
+          Logotipos profesionales que cuentan la historia de tu marca
+        </p>
+      </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section class="max-w-6xl mx-auto py-16 px-4">
+      <div class="text-center mb-12 fade-in" style="animation-delay: 0.8s">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Nuestros Trabajos</h2>
+        <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+      </div>
+
+      <!-- Logo Categories -->
+      <div
+        class="flex flex-wrap justify-center gap-3 mb-12 fade-in"
+        style="animation-delay: 1s"
+      >
+        <button
+          class="px-4 py-2 bg-blue-600 text-white rounded-full font-medium"
+        >
+          Todos
+        </button>
+        <button
+          class="px-4 py-2 bg-white text-gray-700 rounded-full font-medium hover:bg-gray-100"
+        >
+          Minimalistas
+        </button>
+        <button
+          class="px-4 py-2 bg-white text-gray-700 rounded-full font-medium hover:bg-gray-100"
+        >
+          Tipográficos
+        </button>
+        <button
+          class="px-4 py-2 bg-white text-gray-700 rounded-full font-medium hover:bg-gray-100"
+        >
+          Isotipos
+        </button>
+        <button
+          class="px-4 py-2 bg-white text-gray-700 rounded-full font-medium hover:bg-gray-100"
+        >
+          Mascotas
+        </button>
+      </div>
+
+      <!-- Logo Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Logo 1 - Will be animated with 3D on hover -->
+        <div
+          class="logo-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 relative group"
+          onmouseenter="animateLogo3D('text', 'NOMBRE', '#3b82f6')"
+          onmouseleave="reset3DScene()"
+        >
+          <div class="watermark h-64 flex items-center justify-center p-6">
+            <div
+              class="text-4xl font-bold text-blue-600 group-hover:opacity-0 transition-opacity"
+            >
+              NOMBRE
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Logotipo Tipográfico
+            </h3>
+            <p class="text-gray-600">Diseño para marca de ropa urbana</p>
+          </div>
+        </div>
+
+        <!-- Logo 2 -->
+        <div
+          class="logo-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 relative group"
+          onmouseenter="animateLogo3D('shape', 'circle', '#10b981')"
+          onmouseleave="reset3DScene()"
+        >
+          <div class="watermark h-64 flex items-center justify-center p-6">
+            <div class="text-center group-hover:opacity-0 transition-opacity">
+              <div
+                class="w-20 h-20 bg-green-500 rounded-full mx-auto mb-3"
+              ></div>
+              <div class="text-2xl font-bold text-gray-800">ECO</div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Isologo Minimalista
+            </h3>
+            <p class="text-gray-600">Identidad para productos ecológicos</p>
+          </div>
+        </div>
+
+        <!-- Logo 3 -->
+        <div
+          class="logo-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 relative group"
+          onmouseenter="animateLogo3D('text', 'BBQ', '#ef4444')"
+          onmouseleave="reset3DScene()"
+        >
+          <div class="watermark h-64 flex items-center justify-center p-6">
+            <div class="text-center group-hover:opacity-0 transition-opacity">
+              <div class="text-5xl font-bold text-red-500">
+                B<span class="text-yellow-400">B</span>Q
+              </div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Logotipo Creativo
+            </h3>
+            <p class="text-gray-600">Restaurante de carnes a la parrilla</p>
+          </div>
+        </div>
+
+        <!-- Logo 4 -->
+        <div
+          class="logo-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 relative group"
+          onmouseenter="animateLogo3D('shape', 'box', '#8b5cf6')"
+          onmouseleave="reset3DScene()"
+        >
+          <div class="watermark h-64 flex items-center justify-center p-6">
+            <div class="text-center group-hover:opacity-0 transition-opacity">
+              <div
+                class="w-16 h-16 bg-purple-500 rounded-lg rotate-45 mx-auto mb-3"
+              ></div>
+              <div class="text-xl font-bold text-gray-800">TECH</div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Isotipo Geométrico
+            </h3>
+            <p class="text-gray-600">Startup de tecnología</p>
+          </div>
+        </div>
+
+        <!-- Logo 5 -->
+        <div
+          class="logo-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 float-anim"
+        >
+          <div class="watermark h-64 flex items-center justify-center p-6">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-orange-500">CAFÉ</div>
+              <div class="text-sm text-gray-500 mt-1">desde 2023</div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              Logotipo Vintage
+            </h3>
+            <p class="text-gray-600">Cafetería artesanal</p>
+          </div>
+        </div>
+
+        <!-- Logo 6 -->
+        <div
+          class="logo-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 float-anim"
+          style="animation-delay: 0.3s"
+        >
+          <div class="watermark h-64 flex items-center justify-center p-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold">
+                <span class="text-blue-400">M</span
+                ><span class="text-pink-400">K</span>
+              </div>
+              <div class="text-xs text-gray-500 mt-1">consulting</div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Marca Personal</h3>
+            <p class="text-gray-600">Consultoría profesional</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D Design Process -->
+    <section class="bg-gray-100 py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-12 fade-in">
+          Nuestro Proceso Creativo
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="text-center fade-in" style="animation-delay: 0.3s">
+            <div
+              class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4"
+            >
+              1
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Briefing</h3>
+            <p class="text-gray-600">
+              Entendemos tus necesidades y valores de marca
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="text-center fade-in" style="animation-delay: 0.6s">
+            <div
+              class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4"
+            >
+              2
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Conceptos</h3>
+            <p class="text-gray-600">Creación de 3 propuestas iniciales</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center fade-in" style="animation-delay: 0.9s">
+            <div
+              class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4"
+            >
+              3
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Refinamiento</h3>
+            <p class="text-gray-600">Desarrollo de la versión final</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section with Floating Animation -->
+    <section class="bg-blue-700 text-white py-16 px-4">
+      <div class="max-w-4xl mx-auto text-center float-anim">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6">
+          ¿Listo para crear la identidad de tu marca?
+        </h2>
+        <p class="text-xl mb-8">
+          Diseñamos logotipos memorables que comunican tu esencia
+        </p>
+        <a
+          href="https://wa.me/5215512345678"
+          class="inline-block bg-white text-blue-700 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300"
+        >
+          <i class="fab fa-whatsapp mr-2"></i> Solicitar Cotización
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="text-sm">
+          © 2024 TuMarca Design. Todos los derechos reservados.
+        </p>
+        <p class="text-xs text-gray-400 mt-2">
+          Portafolio demostrativo - Logos de ejemplo
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Three.js variables
+      let scene,
+        camera,
+        renderer,
+        controls,
+        activeMesh = null;
+      const container = document.getElementById("logo3d-container");
+
+      // Initialize Three.js scene
+      function init3DScene() {
+        // Scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1e40af);
+
+        // Camera
+        camera = new THREE.PerspectiveCamera(
+          75,
+          container.clientWidth / container.clientHeight,
+          0.1,
+          1000,
+        );
+        camera.position.z = 5;
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+
+        // Controls
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = false;
+        controls.enablePan = false;
+
+        // Create initial logo (your brand logo)
+        create3DTextLogo("TuMarca", "#F3A6C6");
+
+        // Handle window resize
+        window.addEventListener("resize", onWindowResize);
+
+        // Start animation loop
+        animate();
+      }
+
+      function onWindowResize() {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        if (activeMesh) {
+          activeMesh.rotation.x += 0.005;
+          activeMesh.rotation.y += 0.01;
+        }
+
+        controls.update();
+        renderer.render(scene, camera);
+      }
+
+      // Create 3D text logo
+      function create3DTextLogo(text, color) {
+        if (activeMesh) scene.remove(activeMesh);
+
+        const loader = new THREE.FontLoader();
+        loader.load(
+          "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/fonts/helvetiker_regular.typeface.json",
+          function (font) {
+            const geometry = new THREE.TextGeometry(text, {
+              font: font,
+              size: 0.5,
+              height: 0.2,
+              curveSegments: 12,
+              bevelEnabled: true,
+              bevelThickness: 0.03,
+              bevelSize: 0.02,
+              bevelOffset: 0,
+              bevelSegments: 5,
+            });
+
+            const material = new THREE.MeshPhongMaterial({
+              color: new THREE.Color(color),
+              specular: 0x111111,
+              shininess: 30,
+            });
+
+            activeMesh = new THREE.Mesh(geometry, material);
+            activeMesh.position.x = -text.length * 0.15;
+            scene.add(activeMesh);
+          },
+        );
+      }
+
+      // Create 3D shape logo
+      function create3DShapeLogo(shape, color) {
+        if (activeMesh) scene.remove(activeMesh);
+
+        let geometry;
+
+        switch (shape) {
+          case "circle":
+            geometry = new THREE.SphereGeometry(0.5, 32, 32);
+            break;
+          case "box":
+            geometry = new THREE.BoxGeometry(0.8, 0.8, 0.2);
+            break;
+          default:
+            geometry = new THREE.TorusGeometry(0.4, 0.1, 16, 100);
+        }
+
+        const material = new THREE.MeshPhongMaterial({
+          color: new THREE.Color(color),
+          specular: 0x111111,
+          shininess: 30,
+        });
+
+        activeMesh = new THREE.Mesh(geometry, material);
+        scene.add(activeMesh);
+      }
+
+      // Reset to initial logo
+      function reset3DScene() {
+        create3DTextLogo("TuMarca", "#ffffff");
+      }
+
+      // Animate logo on card hover
+      function animateLogo3D(type, content, color) {
+        if (type === "text") {
+          create3DTextLogo(content, color);
+        } else {
+          create3DShapeLogo(content, color);
+        }
+      }
+
+      // Initialize when page loads
+      document.addEventListener("DOMContentLoaded", init3DScene);
+
+      // Scroll animations
+      const fadeElements = document.querySelectorAll(".fade-in");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = 1;
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      fadeElements.forEach((el) => {
+        el.style.opacity = 0;
+        el.style.transform = "translateY(20px)";
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
